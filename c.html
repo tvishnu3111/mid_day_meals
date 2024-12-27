@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>Food Calculations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('00.jpg'); 
+            background-size: right;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 100px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        label {
+            font-weight: bold;
+            color: #1abc9c;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            background-color: #fff;
+        }
+    </style>
+    <script>
+        function calculateSums() {
+            let n = document.getElementById('numValues').value;
+            let values = [];
+            let totalSum1 = 0;
+            let totalAMOUNT = 0;
+            let output = `<table><tr><th>Value</th><th>Sum1</th><th>AMOUNT</th></tr>`;
+
+            for (let i = 0; i < n; i++) {
+                values[i] = parseFloat(document.getElementById('value' + i).value);
+                let sum1 = values[i] * 0.150;
+                let AMOUNT = values[i] * 8.17;
+                totalSum1 += sum1;
+                totalAMOUNT += AMOUNT;
+                output += `<tr><td>${values[i]}</td><td>${sum1.toFixed(2)}</td><td>${AMOUNT.toFixed(2)}</td></tr>`;
+            }
+
+            output += `<tr><td><strong>Totals</strong></td><td><strong>${totalSum1.toFixed(2)}</strong></td><td><strong>${totalAMOUNT.toFixed(2)}</strong></td></tr>`;
+            output += `</table>`;
+            
+            document.getElementById('output').innerHTML = output;
+        }
+
+        function createInputFields() {
+            let n = document.getElementById('numValues').value;
+            let inputFields = "";
+            
+            for (let i = 0; i < n; i++) {
+                inputFields += `Value ${i+1}: <input type="number" id="value${i}" step="0.01"><br>`;
+            }
+            
+            document.getElementById('inputFields').innerHTML = inputFields;
+        }
+    </script>
+</head>
+<body>
+    <h1>Food Calculations</h1>
+    <label for="numValues">Enter the number of values: </label>
+    <input type="number" id="numValues" onchange="createInputFields()">
+    <br><br>
+    <div id="inputFields"></div>
+    <br>
+    <button onclick="calculateSums()">Calculate</button>
+    <br><br>
+    <div id="output"></div>
+</body>
+</html>
